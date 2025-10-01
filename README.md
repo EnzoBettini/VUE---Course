@@ -31,3 +31,5 @@ This repository serves as:
 ---
 
 Feel free to explore the projects, experiment with the code, and apply the learned concepts in your own Vue 3 applications!
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>

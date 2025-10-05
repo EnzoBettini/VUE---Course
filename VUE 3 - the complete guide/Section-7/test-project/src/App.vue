@@ -1,0 +1,17 @@
+<template>
+    <h2>My friends</h2>
+    <friend-component></friend-component>
+    <friend-component></friend-component>
+</template>
+<script>
+export default {
+    data() {
+        return {
+            friends: [
+                { id: 'manuel', name: 'Manuel Lorenz', phone: '12345678', email: 'manuel@gmail.com' },
+                { id: 'ana', name: 'ana silva', phone: '1234567823', email: 'ana@gmail.com' },
+            ],
+        };
+    },
+}
+</script>

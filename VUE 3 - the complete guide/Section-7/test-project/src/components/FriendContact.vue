@@ -1,28 +1,68 @@
 <template>
-    <ul v-for="friend in friends" :key="friend.id">
+    <ul>
         <li>
-          <h2>{{ friend.name }}</h2>
+          <h2>{{ name }} {{ isFavourite === true ? 'Favourite' : '' }}</h2>
           <button @click="toggleDetails()">Show Details</button>
+          <button @click="toggleFavourite()">Toggle Favourite</button>
           <ul v-if="detailsVisible">
-            <li><strong>Phone:</strong> {{ friend.phone }}</li>
-            <li><strong>Email:</strong> {{ friend.email }}</li>
+            <li><strong>Phone:</strong> {{ phoneNumber}}</li>
+            <li><strong>Email:</strong> {{ emailAdress }}</li>
           </ul>
+        <button @click="deleteFriend">Delete friend</button>
         </li>
     </ul>
 </template>
 <script>
 export default {
+    props: {
+        id: {
+            type: String
+        },
+        name: {
+            type: String,
+            required: true
+        },
+        phoneNumber: {
+            type: String,
+            default: 'empty'
+        },
+        emailAdress: String,
+        isFavourite: Boolean
+    },
+    emits: {
+        'toggle-favourite': function (id) {
+            if (id) {
+                return true;
+            } else {
+                console.log('id is missing');
+                return false;
+            }
+        },
+        'delete': {}
+    },
+    // props: [
+    //     'name',
+    //     'phoneNumber',
+    //     'emailAdress'
+    // ],
     data() {
         return {
             detailsVisible: true,
-            friends: [
-                { id: 'manuel', name: 'Manuel Lorenz', phone: '12345678', email: 'manuel@gmail.com' }
-            ],
+            // favouriteStatus: this.isFavourite
         };
     },
     methods: {
         toggleDetails() {
             this.detailsVisible = !this.detailsVisible;
+        },
+        // toggleFavourite() {
+        //     this.favouriteStatus = !this.favouriteStatus;
+        // }
+        toggleFavourite() {
+            this.$emit('toggle-favourite', this.id);
+        },
+        deleteFriend() {
+            this.$emit('delete', this.id);
         }
     }
 }

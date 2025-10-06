@@ -1,0 +1,43 @@
+<template>
+  <div class="user-card">
+    <h2>{{name}}</h2>
+    <h3>{{age}} anos</h3>
+  </div>
+</template>
+
+<script>
+export default {
+    props: ['name', 'age'],
+}
+</script>
+
+<style>
+.user-card {
+  background-color: #fafafa;
+  border-left: 5px solid #007bff;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  text-align: left;
+  width: 250px;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.user-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-card h2 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.25rem;
+  color: #212529;
+}
+
+.user-card h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #6c757d;
+  font-weight: 400;
+}
+</style>

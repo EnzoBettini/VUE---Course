@@ -5,7 +5,10 @@
       <div>
         <base-button @click="loadExperiences()">Load Submitted Experiences</base-button>
       </div>
-      <ul v-if="isLoading">
+      <p v-if="isLoading">Loading...</p>
+      <p v-else-if="!isLoading && error">{{ error }}</p>
+      <p v-else-if="!isLoading && results.length === 0">No data loaded</p>
+      <ul v-else-if="!isLoading && results && results.length > 0">
         <survey-result
           v-for="result in results"
           :key="result.id"
@@ -13,7 +16,6 @@
           :rating="result.rating"
         ></survey-result>
       </ul>
-      <p v-else>Loading...</p>
     </base-card>
   </section>
 </template>
@@ -29,7 +31,8 @@ export default {
   data() {
     return {
       results: [],
-      isLoading: false
+      isLoading: true,
+      error: null
     };
   },
 
@@ -49,7 +52,7 @@ export default {
           }
         })
         .then((data) => {
-          this.loading = false;
+          this.isLoading = false;
           const tempResults = [];
           for (const id in data) {
             tempResults.push({
@@ -59,6 +62,9 @@ export default {
             });
           }
           this.results = tempResults;
+        }).catch((error) => {
+          this.isLoading = false;
+          this.error = error
         });
     },
   },

@@ -45,6 +45,7 @@ export default {
       enteredName: '',
       chosenRating: null,
       invalidInput: false,
+      error: null
     };
   },
   // emits: ['survey-submit'],
@@ -70,6 +71,8 @@ export default {
           name:this.enteredName,
           rating: this.chosenRating
         })
+      }).catch(() => {
+        console.log('error sending data')
       });
 
       // axios.post('https://vue-http-demo-85e9e.firebaseio.com/surveys.json', {
